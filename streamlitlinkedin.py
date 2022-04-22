@@ -9,7 +9,8 @@ import contextlib
 import time
 from st_aggrid import AgGrid,JsCode, GridUpdateMode
 from st_aggrid.grid_options_builder import GridOptionsBuilder
-
+# from IPython.core.display import display, HTML
+from IPython.display import display, HTML
 from some.short import start_linkedin, search_job, save_the_jobs,dataframe_editor, make_clickable
 
 
@@ -22,14 +23,17 @@ st.title('Linkedin Job Scraper And Enhanced Filtering APP')
 with open('some/description.txt','r') as f:
     st.write(f'{f.read()}')
 st.markdown("<h1>Search For Job Title and Location</h2>", unsafe_allow_html=True)
-
+# radial-gradient(circle, transparent 5%, #EEE8E8 5%)
 st.markdown(
     """
 <style>
 .stMarkdown {
-    border-radius: 15px;
-    border-right:220px solid #EEE8E8 radial-gradient(circle, transparent 5%, #EEE8E8 5%) ;
-    border-left:240px solid #EEE8E8 radial-gradient(circle, transparent 5%, #EEE8E8 5%) ;
+    border-radius: 25px;
+    border-right:220px solid #EEE8E8 ;
+    border-top-right-radius: 100px !important;
+    border-bottom-right-radius: 100px;
+    border-left:240px solid #EEE8E8  ;
+    border-top-left-radius: 3px;
     
     padding: 180px, 180px, 10px, 10px;
     
@@ -101,6 +105,9 @@ max = z['number of applicants'].max() if z['number of applicants'].max() >0 else
 Number_of_applications = st.sidebar.slider('Applicants ', help='setted number represenents smaller number of applicants',min_value=int(z['number of applicants'].min()), max_value=int(max), value = int(z['number of applicants'].max()))
 selected_zzz = languge_workplace_selected_z[languge_workplace_selected_z['number of applicants'] <= Number_of_applications]
 
+
+
+
 hiring = st.selectbox('Hiring Status',selected_zzz['hiring status'].unique())
 # hiring = str(hiring)
 selected_zzzz = selected_zzz[selected_zzz['hiring status'] == hiring]
@@ -111,30 +118,28 @@ if easy_apply == 'True':
     st.button('Easy Apply',help='Apply now!')
 selected_zzzzz = selected_zzzz[selected_zzzz['easy apply'] == easy_apply]
 
-# company_name = st.selectbox('Company Name', selected_zzzzz['company name'])
-# selected_zzzzzzz = selected_zzzzz[selected_zzzzz['company name'] == company_name]
-# time.sleep(3)
-# Create color dictionary
-# color_dict = {0:'red',2:'red',3:'lime',6:'red',7:'lime'}
 
-# Function to color rows
-# def highlight_rows(s):
-#     if s['description'] in color_dict:
-#         return [f"background-color:{color_dict[int(s['description'])]}"] * len(s)
-#     else:
-#         return ['background-color:white'] * len(s)
+# this is working for streamlit but i need to work it for aggrid also
+# selected_zzzzz['job link'] = selected_zzzzz['job link'].apply(make_clickable)
+# st.write(selected_zzzzz.to_html(escape=False, index=False), unsafe_allow_html=True)
 
-# Color rows and hide the id column
-# st.sidebar.dataframe(z.style.apply(highlight_rows, axis=1).hide_columns(['description']))
-# st.table(z)
 
 st.header('Job Search Results')
 
 # Grid options
 
 gd = GridOptionsBuilder.from_dataframe(selected_zzzzz)
-# without_company = gd.with_no_column('company name')
-gd.configure_default_column(editable=False, groupable=True, sortable=True,FontSize=68)
+
+gd.configure_default_column(editable=False, groupable=True, sortable=True)
+
+
+
+# gd.configure_column('job link',cellRenderer=JsCode('''function(df['job link']){
+#         return '<a href="' + params.value + '" target="_blank">' + click the link + '</a>';))}'''))
+# gd.configure_column(selected_zzzz["job link"],
+#                             headerName="Link",
+#                             cellRenderer=JsCode('''function(params) {return '<a href=params>click the lins</a>'}'''),
+#                             width=300)
 
 gridoptions = gd.build()
 #still working on nested grids, hide columns and rows

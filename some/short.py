@@ -175,7 +175,7 @@ def dataframe_editor(df):
     return df
 
 def make_clickable(val):
-    return f'<a target="_blank" href="{val}">click to see link</a>'
+    return f'<a target="blank" href="{val}">click to see link</a>'
 
 def text_evaluater(text):
     pass
