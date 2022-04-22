@@ -1,0 +1,161 @@
+from msilib.schema import Font
+import streamlit as st
+import requests
+import pandas as pd
+import numpy as np 
+# from bs4 import BeautifulSoup as bs
+import re 
+import contextlib
+import time
+from st_aggrid import AgGrid,JsCode, GridUpdateMode
+from st_aggrid.grid_options_builder import GridOptionsBuilder
+
+from some.short import start_linkedin, search_job, save_the_jobs,dataframe_editor, make_clickable
+
+
+st.set_page_config(layout="wide")
+email = 'emrebasarr_@hotmail.com'
+password = 'linkedin19944'  
+
+st.title('Linkedin Job Scraper And Enhanced Filtering APP')
+
+with open('some/description.txt','r') as f:
+    st.write(f'{f.read()}')
+st.markdown("<h1>Search For Job Title and Location</h2>", unsafe_allow_html=True)
+
+st.markdown(
+    """
+<style>
+.stMarkdown {
+    border-radius: 15px;
+    border-right:220px solid #EEE8E8 radial-gradient(circle, transparent 5%, #EEE8E8 5%) ;
+    border-left:240px solid #EEE8E8 radial-gradient(circle, transparent 5%, #EEE8E8 5%) ;
+    
+    padding: 180px, 180px, 10px, 10px;
+    
+    text-align: center;
+    background-color: #EF5B20;
+}
+
+
+</style>
+""",
+    unsafe_allow_html=True,
+)
+#style= 'border-right:50px solid #EEE8E8;border-left:50px solid #EEE8E8;'
+# with open('/style/style.css', 'r') as f:
+#     st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
+col1, col2 = st.columns([1, 1]) 
+search_tag = col1.text_input('', help='Enter the search string and skip the location do not enter or tab',placeholder='Enter the desired job')
+position = search_tag.replace(' ', "%20")
+
+location_tag = col2.text_input('', help='Enter the location and hit Enter/Return',placeholder='Enter the location')
+location_tag = location_tag.replace(' ', "%20")
+
+
+@st.cache
+def linkedin_complete(username,password):
+    start_linkedin(username,password)
+    results = search_job(position,location_tag)
+    
+    return  save_the_jobs(results)
+dataframe = linkedin_complete(email,password)
+
+@st.cache
+def dataframe_finalizer(df):
+    zp = pd.DataFrame(df)
+    #  edit dataframe zp and ad education info, work experience info(senior junior)
+
+
+
+    z = zp.filter(['position name',
+        'workplace',
+        'number of employees',
+        'location',
+        'company name',
+        'working salary info',
+        'number of applicants',
+        'ad time',
+        'hiring status',
+        'corresponds name',
+        'connection is able',
+        'ad language',
+        'job link',
+        'easy apply',])
+
+    return dataframe_editor(z)
+
+z = dataframe_finalizer(dataframe)
+
+
+language = sorted(z['ad language'].unique())
+selected_language = st.sidebar.multiselect('Select the language', language, language)
+language_selected_z = z[z['ad language'].isin(selected_language)]
+
+
+workplace = sorted(z['workplace'].unique())
+selected_workplace = st.sidebar.multiselect('Select the workplace', workplace, workplace)
+languge_workplace_selected_z = language_selected_z[language_selected_z['workplace'].isin(selected_workplace)]
+
+max = z['number of applicants'].max() if z['number of applicants'].max() >0 else 1
+Number_of_applications = st.sidebar.slider('Applicants ', help='setted number represenents smaller number of applicants',min_value=int(z['number of applicants'].min()), max_value=int(max), value = int(z['number of applicants'].max()))
+selected_zzz = languge_workplace_selected_z[languge_workplace_selected_z['number of applicants'] <= Number_of_applications]
+
+hiring = st.selectbox('Hiring Status',selected_zzz['hiring status'].unique())
+# hiring = str(hiring)
+selected_zzzz = selected_zzz[selected_zzz['hiring status'] == hiring]
+
+easy_apply = str(st.checkbox('Easy Apply',value=False,help='Check the box and click the nested button to apply the job'))
+# activate the easy apply button if the checkbox is checked and easy apply button provide to apply the job
+if easy_apply == 'True':
+    st.button('Easy Apply',help='Apply now!')
+selected_zzzzz = selected_zzzz[selected_zzzz['easy apply'] == easy_apply]
+
+# company_name = st.selectbox('Company Name', selected_zzzzz['company name'])
+# selected_zzzzzzz = selected_zzzzz[selected_zzzzz['company name'] == company_name]
+# time.sleep(3)
+# Create color dictionary
+# color_dict = {0:'red',2:'red',3:'lime',6:'red',7:'lime'}
+
+# Function to color rows
+# def highlight_rows(s):
+#     if s['description'] in color_dict:
+#         return [f"background-color:{color_dict[int(s['description'])]}"] * len(s)
+#     else:
+#         return ['background-color:white'] * len(s)
+
+# Color rows and hide the id column
+# st.sidebar.dataframe(z.style.apply(highlight_rows, axis=1).hide_columns(['description']))
+# st.table(z)
+
+st.header('Job Search Results')
+
+# Grid options
+
+gd = GridOptionsBuilder.from_dataframe(selected_zzzzz)
+# without_company = gd.with_no_column('company name')
+gd.configure_default_column(editable=False, groupable=True, sortable=True,FontSize=68)
+
+gridoptions = gd.build()
+#still working on nested grids, hide columns and rows
+# column_defs = [{'headername':c,'field': c} for c in selected_zzzzz.columns]
+# grid_options = {
+#     'columndefs':column_defs,
+#     'enableSorting': True,
+#     'enableFilter': True,
+#     'enableColResize': True,
+#     'enableRangeSelection': True,
+#     'rowSelection': 'multiple',
+# }
+
+
+gd.configure_pagination()
+gd.configure_side_bar()
+grid_table = AgGrid(selected_zzzzz, gridoptions,
+                    enable_enterprise_modules=True,
+                    update_mode = GridUpdateMode.SELECTION_CHANGED,
+                    height = '500px',
+                    position = 'fixed',
+                    allow_unsafe_jscode=True,
+                    theme = 'streamlit',
+                    )

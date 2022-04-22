@@ -1,0 +1,13 @@
+This app is for scraping jobs from Linkedin.com and filtering them by location, job title, and company name.
+
+Hiring status stands for actively recruiting companies, make it true to see actively recruiting companies
+        
+        By checking easy apply you can filter table with only ads with easy apply option,
+
+Also user can filter number of applicants by the slider on the side bar
+
+        Language bar shows what is the ad language not desired language for the position be aware!
+
+Workplace tells you if job is remote, hybrid or on-site
+
+        Please Do not forget to hover on help signs around the attributes of the page!!
