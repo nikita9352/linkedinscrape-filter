@@ -3,11 +3,17 @@ This repository includes Linkedin Scraping and Filtering with selenium and strea
 For search the job, enter job title and location
 ![image](https://user-images.githubusercontent.com/33352899/165777544-4b2c2ef2-d460-4fca-b6d3-c8324191e108.png)
 attributes that I scrape and andd as a filter are 
+
         'position name',
+        
         'workplace',
+        
         'number of employees',
+        
         'location',
+        
         'company name',
+        
         'working salary info',
         'number of applicants',
         'ad time',
