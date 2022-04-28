@@ -20,4 +20,5 @@ attributes that I scrape and andd as a filter are
 Read explanations of the filters on main page
 ![image](https://user-images.githubusercontent.com/33352899/165777934-dcabb472-1e0f-4f81-8d3d-72f99e4235ac.png)
 here is the result table 
-![image](https://user-images.githubusercontent.com/33352899/165778103-066bf436-3c25-498c-bf17-64b150e71b43.png)
+![image](https://user-images.githubusercontent.com/33352899/165783226-c44f0241-20bb-480f-be50-21febb0123a9.png)
+
