@@ -83,7 +83,7 @@ def save_the_jobs(job_link):
 	
     }
 
-	for i in range(len(job_link[:5])):
+	for i in range(len(job_link[:21])):
 		# i.click()
 		time.sleep(1)
 		dicts['job link'].append(job_link[i])

@@ -10,4 +10,6 @@ Also user can filter number of applicants by the slider on the side bar
 
 Workplace tells you if job is remote, hybrid or on-site
 
-        Please Do not forget to hover on help signs around the attributes of the page!!
+        Correspond name give you the contact name if there is a avaliable contact for the ad
+
+Please Do not forget to hover on help signs around the attributes of the page!!
