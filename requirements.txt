@@ -7,8 +7,8 @@ asgiref==3.4.1
 # asttokens @ file:///home/conda/feedstock_root/build_artifacts/asttokens_1618968359944/work
 async-generator==1.10
 attrs==21.4.0
-backcall @ file:///home/conda/feedstock_root/build_artifacts/backcall_1592338393461/work
-backports.functools-lru-cache @ file:///home/conda/feedstock_root/build_artifacts/backports.functools_lru_cache_1618230623929/work
+# backcall @ file:///home/conda/feedstock_root/build_artifacts/backcall_1592338393461/work
+# backports.functools-lru-cache @ file:///home/conda/feedstock_root/build_artifacts/backports.functools_lru_cache_1618230623929/work
 bcrypt==3.2.0
 beautifulsoup4==4.10.0
 bleach==5.0.0
@@ -24,7 +24,7 @@ colorthief==0.2.1
 cryptography==36.0.0
 cssselect2==0.4.1
 debugpy @ file:///D:/bld/debugpy_1636043518246/work
-decorator @ file:///home/conda/feedstock_root/build_artifacts/decorator_1641555617451/work
+# decorator @ file:///home/conda/feedstock_root/build_artifacts/decorator_1641555617451/work
 defusedxml==0.7.1
 diff-match-patch==20200713
 Django==3.2.10
@@ -48,9 +48,9 @@ dnspython==2.1.0
 easy-thumbnails==2.8
 ecdsa==0.17.0
 email-validator==1.1.3
-entrypoints @ file:///home/conda/feedstock_root/build_artifacts/entrypoints_1643888246732/work
+# entrypoints @ file:///home/conda/feedstock_root/build_artifacts/entrypoints_1643888246732/work
 et-xmlfile==1.1.0
-executing @ file:///home/conda/feedstock_root/build_artifacts/executing_1646044401614/work
+# executing @ file:///home/conda/feedstock_root/build_artifacts/executing_1646044401614/work
 fastapi==0.70.0
 fastjsonschema==2.15.3
 gitdb==4.0.9
@@ -63,7 +63,7 @@ hyper==0.7.0
 hyperframe==3.2.0
 idna==3.3
 importlib-metadata==4.11.3
-ipykernel @ file:///D:/bld/ipykernel_1648735759001/work/dist/ipykernel-6.11.0-py3-none-any.whl
+# ipykernel @ file:///D:/bld/ipykernel_1648735759001/work/dist/ipykernel-6.11.0-py3-none-any.whl
 ipython @ file:///D:/bld/ipython_1648413712410/work
 ipython-genutils==0.2.0
 ipywidgets==7.7.0
@@ -71,8 +71,8 @@ jedi @ file:///D:/bld/jedi_1637175265063/work
 Jinja2==3.1.1
 joblib==1.1.0
 jsonschema==4.4.0
-jupyter-client @ file:///home/conda/feedstock_root/build_artifacts/jupyter_client_1648664435131/work
-jupyter-core @ file:///D:/bld/jupyter_core_1645024565859/work
+# jupyter-client @ file:///home/conda/feedstock_root/build_artifacts/jupyter_client_1648664435131/work
+# jupyter-core @ file:///D:/bld/jupyter_core_1645024565859/work
 jupyterlab-pygments==0.2.0
 jupyterlab-widgets==1.1.0
 langdetect==1.0.9
@@ -142,7 +142,7 @@ smmap==5.0.0
 sniffio==1.2.0
 sortedcontainers==2.4.0
 soupsieve==2.3.1
-sqlparse==0.4.2
+# sqlparse==0.4.2
 # stack-data @ file:///home/conda/feedstock_root/build_artifacts/stack_data_1644872665635/work
 starlette==0.16.0
 streamlit==1.8.1
