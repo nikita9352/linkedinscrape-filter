@@ -4,7 +4,7 @@ apns2==0.7.2
 argon2-cffi==21.3.0
 argon2-cffi-bindings==21.2.0
 asgiref==3.4.1
-asttokens @ file:///home/conda/feedstock_root/build_artifacts/asttokens_1618968359944/work
+# asttokens @ file:///home/conda/feedstock_root/build_artifacts/asttokens_1618968359944/work
 async-generator==1.10
 attrs==21.4.0
 backcall @ file:///home/conda/feedstock_root/build_artifacts/backcall_1592338393461/work
