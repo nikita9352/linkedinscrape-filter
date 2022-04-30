@@ -12,7 +12,7 @@ from st_aggrid.grid_options_builder import GridOptionsBuilder
 # from IPython.core.display import display, HTML
 from IPython.display import display, HTML
 from some.short import start_linkedin, search_job, save_the_jobs,dataframe_editor, make_clickable
-
+# HEroku deployment unseccessful
 
 st.set_page_config(layout="wide")
 email = 'emrebasarr_@hotmail.com'
