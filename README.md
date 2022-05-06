@@ -1,5 +1,6 @@
 # linkedinscrape-filter
 ONLY FOR EDUCATIONAL PURPOSES!!! Use Linkedin API to get data from linkedin
+
 This repository includes Linkedin Scraping and Filtering with selenium and streamlit
 For search the job, enter job title and location
 ![image](https://user-images.githubusercontent.com/33352899/165777544-4b2c2ef2-d460-4fca-b6d3-c8324191e108.png)
