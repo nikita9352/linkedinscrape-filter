@@ -16,7 +16,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 
 options = wb.ChromeOptions()
 options.add_experimental_option('excludeSwitches', ['enable-logging'])
-browser  = wb.Chrome(options=options)
+browser  = wb.Chrome(executable_path='C:/Users/emreb/Documents/projects/linkedinscraper/linkedinscrape-filter/somechromedriver.exe',options=options)
 # url_signin = 'https://www.linkedin.com/'
 # search_tag =  'data scientist'
 
