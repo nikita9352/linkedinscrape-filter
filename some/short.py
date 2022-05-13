@@ -16,7 +16,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 
 options = wb.ChromeOptions()
 options.add_experimental_option('excludeSwitches', ['enable-logging'])
-browser  = wb.Chrome(executable_path='C:/Users/emreb/Documents/projects/linkedinscraper/linkedinscrape-filter/somechromedriver.exe',options=options)
+browser  = wb.Chrome(options=options)
 # url_signin = 'https://www.linkedin.com/'
 # search_tag =  'data scientist'
 
@@ -83,7 +83,7 @@ def save_the_jobs(job_link):
 	
     }
 
-	for i in range(len(job_link[:21])):
+	for i in range(len(job_link[:3])):
 		# i.click()
 		time.sleep(1)
 		dicts['job link'].append(job_link[i])
@@ -170,8 +170,10 @@ def save_the_jobs(job_link):
 	return dicts
 
 def dataframe_editor(df):
-    df['number of applicants'] = ( df['number of applicants'].apply(lambda x: int(x.split(' ')[0]) if x != 0 else x ))
-    df['connection is able'] = (df['connection is able'].apply(lambda x: int(x.split(' ')[0]) if x != 0 else x))
+
+    df['number of applicants'] = (df['number of applicants'].apply(lambda x: int(x.split()[0]) if x != 0 else x))
+    df['connection is able'] = (df['connection is able'].apply(lambda x: int(x.split()[0]) if x != 0 else x))
+
     return df
 
 def make_clickable(val):

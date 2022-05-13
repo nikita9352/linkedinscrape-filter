@@ -13,7 +13,7 @@ from st_aggrid.grid_options_builder import GridOptionsBuilder
 from IPython.display import display, HTML
 from some.short import start_linkedin, search_job, save_the_jobs,dataframe_editor, make_clickable
 # HEroku deployment unseccessful
-
+import time
 st.set_page_config(layout="wide")
 email = 'emrebasarr_@hotmail.com'
 password = 'linkedin19944'  
@@ -61,18 +61,18 @@ location_tag = location_tag.replace(' ', "%20")
 def linkedin_complete(username,password):
     start_linkedin(username,password)
     results = search_job(position,location_tag)
-    
+
     return  save_the_jobs(results)
-dataframe = linkedin_complete(email,password)
-
-@st.cache
-def dataframe_finalizer(df):
-    zp = pd.DataFrame(df)
-    #  edit dataframe zp and ad education info, work experience info(senior junior)
 
 
+# def searchbutton():
 
-    z = zp.filter(['position name',
+#     if st.button('Search'):
+
+#         dataframe = linkedin_complete(email,password)
+#         return dataframe
+    # time.sleep(5)
+columnss = ['position name',
         'workplace',
         'number of employees',
         'location',
@@ -85,7 +85,33 @@ def dataframe_finalizer(df):
         'connection is able',
         'ad language',
         'job link',
-        'easy apply',])
+        'easy apply']
+but = st.button('Search Jobs', key='button_add_project',
+          on_click=linkedin_complete, args=[email,password])
+if but:
+    dataframe = linkedin_complete(email,password)
+else:
+    dataframe = pd.DataFrame(np.zeros((2, len(columnss))),columns= columnss)
+    # else:
+    #     dataframe  = pd.DataFrame(columns = ['ad language', 'connection is able', 'number of applicants','workplace'])
+        # dataframe= st.cache(linkedin_complete)(email,password)
+
+
+
+    # else:
+    #     return st.write('Please enter the search string and location')
+
+    # dataframe = searchbutton()
+
+
+@st.cache
+def dataframe_finalizer(df):
+    zp = pd.DataFrame(df)
+    #  edit dataframe zp and ad education info, work experience info(senior junior)
+
+
+
+    z = zp.filter(columnss)
 
     return dataframe_editor(z)
 
@@ -96,10 +122,13 @@ language = sorted(z['ad language'].unique())
 selected_language = st.sidebar.multiselect('Select the language', language, language)
 language_selected_z = z[z['ad language'].isin(selected_language)]
 
-
-workplace = sorted(z['workplace'].unique())
+try:
+    workplace = sorted(z['workplace'].unique())
+except:
+    workplace = []
 selected_workplace = st.sidebar.multiselect('Select the workplace', workplace, workplace)
 languge_workplace_selected_z = language_selected_z[language_selected_z['workplace'].isin(selected_workplace)]
+
 
 max = z['number of applicants'].max() if z['number of applicants'].max() >0 else 1
 Number_of_applications = st.sidebar.slider('Applicants ', help='setted number represenents smaller number of applicants',min_value=int(z['number of applicants'].min()), max_value=int(max), value = int(z['number of applicants'].max()))
