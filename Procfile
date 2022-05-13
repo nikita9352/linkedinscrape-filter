@@ -1,1 +1,1 @@
-web:python streamlitlinkedin.py
+web: sh setup.sh && streamlit run streamlitlinkedin.py
