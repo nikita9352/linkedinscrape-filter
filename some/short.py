@@ -12,12 +12,19 @@ import time
 from selenium import webdriver as wb
 from selenium.webdriver.common.keys import Keys
 from webdriver_manager.chrome import ChromeDriverManager
-
+import os
 
 
 options = wb.ChromeOptions()
+# options.binary_location = 
 options.add_experimental_option('excludeSwitches', ['enable-logging'],)
-browser  = wb.Chrome(executable_path='C:/Users/emreb/Documents/projects/linkedinscraper/linkedinscrape-filter/some/chromedriver.exe',options=options)
+options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+# path = 'C:/Users/emreb/Documents/projects/linkedinscraper/linkedinscrape-filter/chromedriver.exe'
+path = os.environ.get('CHROMEDRIVER_PATH')
+options.add_argument("--headless")
+options.add_argument("--disable-gpu")
+options.add_argument("--no-sandbox")
+browser  = wb.Chrome(options=options,executable_path=path)
 # url_signin = 'https://www.linkedin.com/'
 # search_tag =  'data scientist'
 
@@ -177,8 +184,8 @@ def dataframe_editor(df):
 
     return df
 
-def make_clickable(val):
-    return f'<a target="blank" href="{val}">click to see link</a>'
+# def make_clickable(val):
+#     return f'<a target="blank" href="{val}">click to see link</a>'
 
 def text_evaluater(text):
     pass
