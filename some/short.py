@@ -1,4 +1,5 @@
 
+from http.server import executable
 import requests
 import pandas as pd
 import numpy as np 
@@ -15,8 +16,8 @@ from webdriver_manager.chrome import ChromeDriverManager
 
 
 options = wb.ChromeOptions()
-options.add_experimental_option('excludeSwitches', ['enable-logging'])
-browser  = wb.Chrome(options=options)
+options.add_experimental_option('excludeSwitches', ['enable-logging'],)
+browser  = wb.Chrome(executable_path='C:/Users/emreb/Documents/projects/linkedinscraper/linkedinscrape-filter/some/chromedriver.exe',options=options)
 # url_signin = 'https://www.linkedin.com/'
 # search_tag =  'data scientist'
 
@@ -24,7 +25,7 @@ def start_linkedin(username,password):
 #    self.browser.get("https://linkedin.com/uas/login")
 #def login(driver): #, username, password):
         # browser  = wb.Chrome()
-        print("\nLogging in.....\n \nPlease wait :) \n ")
+        print("/nLogging in.....\n \nPlease wait :) \n ")
         browser.get("https://www.linkedin.com/")
         try:
             user_field = browser.find_element(By.ID, "session_key")
