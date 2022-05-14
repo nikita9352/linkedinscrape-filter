@@ -18,13 +18,14 @@ import os
 options = wb.ChromeOptions()
 # options.binary_location = 
 options.add_experimental_option('excludeSwitches', ['enable-logging'],)
-# options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
 path = 'C:/Users/emreb/Documents/projects/linkedinscraper/linkedinscrape-filter/chromedriver.exe'
+path_ubuntu = '/snap/bin/chromium.chromedriver'
 # path = os.environ.get('CHROMEDRIVER_PATH')
 options.add_argument("--headless")
 options.add_argument("--disable-gpu")
 options.add_argument("--no-sandbox")
-browser  = wb.Chrome(options=options,executable_path=path)
+browser  = wb.Chrome(options=options,executable_path=path_ubuntu)
 # url_signin = 'https://www.linkedin.com/'
 # search_tag =  'data scientist'
 
