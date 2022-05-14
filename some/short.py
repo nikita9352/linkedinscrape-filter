@@ -25,7 +25,7 @@ path_ubuntu = '/snap/bin/chromium.chromedriver'
 options.add_argument("--headless")
 options.add_argument("--disable-gpu")
 options.add_argument("--no-sandbox")
-browser  = wb.Chrome(options=options,executable_path=os.environ.get("GOOGLE_CHROME_PATH"))
+browser  = wb.Chrome(options=options,executable_path=os.environ.get("CHROMEDRIVER_PATH"))
 # url_signin = 'https://www.linkedin.com/'
 # search_tag =  'data scientist'
 
