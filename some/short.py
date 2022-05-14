@@ -1,4 +1,5 @@
 
+from http.server import executable
 import requests
 import pandas as pd
 import numpy as np 
@@ -11,12 +12,19 @@ import time
 from selenium import webdriver as wb
 from selenium.webdriver.common.keys import Keys
 from webdriver_manager.chrome import ChromeDriverManager
-
+import os
 
 
 options = wb.ChromeOptions()
-options.add_experimental_option('excludeSwitches', ['enable-logging'])
-browser  = wb.Chrome(options=options)
+# options.binary_location = 
+options.add_experimental_option('excludeSwitches', ['enable-logging'],)
+options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+# path = 'C:/Users/emreb/Documents/projects/linkedinscraper/linkedinscrape-filter/chromedriver.exe'
+path = os.environ.get('CHROMEDRIVER_PATH')
+options.add_argument("--headless")
+options.add_argument("--disable-gpu")
+options.add_argument("--no-sandbox")
+browser  = wb.Chrome(options=options,executable_path=path)
 # url_signin = 'https://www.linkedin.com/'
 # search_tag =  'data scientist'
 
@@ -24,7 +32,7 @@ def start_linkedin(username,password):
 #    self.browser.get("https://linkedin.com/uas/login")
 #def login(driver): #, username, password):
         # browser  = wb.Chrome()
-        print("\nLogging in.....\n \nPlease wait :) \n ")
+        print("/nLogging in.....\n \nPlease wait :) \n ")
         browser.get("https://www.linkedin.com/")
         try:
             user_field = browser.find_element(By.ID, "session_key")
@@ -83,7 +91,7 @@ def save_the_jobs(job_link):
 	
     }
 
-	for i in range(len(job_link[:21])):
+	for i in range(len(job_link[:3])):
 		# i.click()
 		time.sleep(1)
 		dicts['job link'].append(job_link[i])
@@ -170,12 +178,14 @@ def save_the_jobs(job_link):
 	return dicts
 
 def dataframe_editor(df):
-    df['number of applicants'] = ( df['number of applicants'].apply(lambda x: int(x.split(' ')[0]) if x != 0 else x ))
-    df['connection is able'] = (df['connection is able'].apply(lambda x: int(x.split(' ')[0]) if x != 0 else x))
+
+    df['number of applicants'] = (df['number of applicants'].apply(lambda x: int(x.split()[0]) if x != 0 else x))
+    df['connection is able'] = (df['connection is able'].apply(lambda x: int(x.split()[0]) if x != 0 else x))
+
     return df
 
-def make_clickable(val):
-    return f'<a target="blank" href="{val}">click to see link</a>'
+# def make_clickable(val):
+#     return f'<a target="blank" href="{val}">click to see link</a>'
 
 def text_evaluater(text):
     pass
