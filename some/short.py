@@ -28,24 +28,38 @@ browser  = wb.Chrome(options=options,executable_path=path)
 # url_signin = 'https://www.linkedin.com/'
 # search_tag =  'data scientist'
 
-def start_linkedin(username,password):
+def start_linkedin(username,password,verification_code=None):
+
 #    self.browser.get("https://linkedin.com/uas/login")
 #def login(driver): #, username, password):
         # browser  = wb.Chrome()
-        print("/nLogging in.....\n \nPlease wait :) \n ")
-        browser.get("https://www.linkedin.com/")
-        try:
-            user_field = browser.find_element(By.ID, "session_key")
-            pw_field = browser.find_element(By.ID,"session_password")
-            login_button = browser.find_element(By.CLASS_NAME,"sign-in-form__submit-button")
-            user_field.send_keys(username)
-            user_field.send_keys(Keys.TAB)
-            time.sleep(1)
-            pw_field.send_keys(password)
-            time.sleep(3)
-            login_button.click()
-        except Exception:
-            print("TimeoutException! Username/password field or login button not found on linkedin.com")
+	print("/nLogging in.....\n \nPlease wait :) \n ")
+	browser.get("https://www.linkedin.com/")
+	try:
+		user_field = browser.find_element(By.ID, "session_key")
+		pw_field = browser.find_element(By.ID,"session_password")
+		login_button = browser.find_element(By.CLASS_NAME,"sign-in-form__submit-button")
+		user_field.send_keys(username)
+		user_field.send_keys(Keys.TAB)
+		time.sleep(1)
+		pw_field.send_keys(password)
+		time.sleep(16)
+		login_button.click()
+		time.sleep(16)
+		try:
+			browser.find_element(By.ID,"input__phone_verification_pin")
+			verification_code = browser.find_element(By.ID,"input__phone_verification_pin")
+			submit_button = browser.find_element(By.CLASS_NAME,"form__submit form__submit--stretch")
+			verification_code.send_keys(verification_code)
+			time.sleep(1)
+			submit_button.click()
+		except:
+			pass
+		# add here verification code for login or microsoft authenctiocator
+
+	except Exception:
+
+		print("TimeoutException! Username/password field or login button not found on linkedin.com")
 
 def search_job(search_tag,location):
         # browser  = wb.Chrome()

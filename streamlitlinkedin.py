@@ -25,6 +25,7 @@ st.set_page_config(layout="wide")
 email = 'emrebasarr_@hotmail.com'
 password = 'linkedin19944'  
 
+
 st.title('Linkedin Job Scraper And Enhanced Filtering APP')
 
 with open('some/description.txt','r') as f:
@@ -64,9 +65,11 @@ location_tag = col2.text_input('', help='Enter the location and hit Enter/Return
 location_tag = location_tag.replace(' ', "%20")
 
 
+verification_code = st.text_input('Enter Verification Code',help='Enter the verification code ',placeholder='Enter the verification code')
+
 @st.cache
-def linkedin_complete(username,password):
-    start_linkedin(username,password)
+def linkedin_complete(username,password,verification_code=None):
+    start_linkedin(username,password,verification_code)
     results = search_job(position,location_tag)
 
     return  save_the_jobs(results)
