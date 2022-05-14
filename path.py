@@ -1,3 +1,3 @@
 import os 
-path = os.environ.get("GOOGLE_CHROME_BIN")
+path = os.environ.get("CHROMEDRIVER_PATH")
 print(path)
