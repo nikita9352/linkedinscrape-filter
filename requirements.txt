@@ -62,7 +62,7 @@ jupyterlab-widgets==1.1.0
 langdetect==1.0.9
 linkedin-api==1.1.0
 linkedin-scraper==2.9.0
-lxml==4.6.4
+lxml==4.6.5
 MarkupPy==1.14
 MarkupSafe==2.1.1
 matplotlib-inline==0.1.3
