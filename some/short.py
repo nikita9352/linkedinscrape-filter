@@ -29,6 +29,7 @@ browser  = wb.Chrome(options=options,executable_path=os.environ.get("CHROMEDRIVE
 # url_signin = 'https://www.linkedin.com/'
 # search_tag =  'data scientist'
 
+# verification code is not working
 def start_linkedin(username,password,verification_code=None):
 
 #    self.browser.get("https://linkedin.com/uas/login")
@@ -48,6 +49,7 @@ def start_linkedin(username,password,verification_code=None):
 		login_button.click()
 		time.sleep(16)
 		try:
+			time.sleep(16)
 			browser.find_element(By.ID,"input__phone_verification_pin")
 			verification_code = browser.find_element(By.ID,"input__phone_verification_pin")
 			submit_button = browser.find_element(By.CLASS_NAME,"form__submit form__submit--stretch")
