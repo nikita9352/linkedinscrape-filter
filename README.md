@@ -8,7 +8,7 @@ attributes that I scrape and as a filters are:
 
         position name, name of the position
         workplace, is it On-site, Hybrid, Remote?
-        number of employees,
+        number of employees, total number of employee in company
         location, work location
         company name, name of the company
         working salary info, is it Full-Time, Part-Time or if any declared salary info 
