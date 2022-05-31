@@ -18,14 +18,14 @@ import os
 options = wb.ChromeOptions()
 # options.binary_location = 
 options.add_experimental_option('excludeSwitches', ['enable-logging'],)
-options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-# path = 'C:/Users/emreb/Documents/projects/linkedinscraper/linkedinscrape-filter/chromedriver.exe'
-path_ubuntu = '/snap/bin/chromium.chromedriver'
-# path = os.environ.get('CHROMEDRIVER_PATH')
-options.add_argument("--headless")
+# options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+path = 'C:/Users/emreb/Documents/projects/linkedinscraper/linkedinscrape-filter/chromedriver.exe'
+# path_ubuntu = '/snap/bin/chromium.chromedriver'
+# path = os.environ.get('CHROMEDRIVER_PATH') os.environ.get("CHROMEDRIVER_PATH")
+# options.add_argument("--headless")
 options.add_argument("--disable-gpu")
-options.add_argument("--no-sandbox")
-browser  = wb.Chrome(options=options,executable_path=os.environ.get("CHROMEDRIVER_PATH"))
+# options.add_argument("--no-sandbox")
+browser  = wb.Chrome(options=options,executable_path=path)
 # url_signin = 'https://www.linkedin.com/'
 # search_tag =  'data scientist'
 
@@ -45,19 +45,19 @@ def start_linkedin(username,password,verification_code=None):
 		user_field.send_keys(Keys.TAB)
 		time.sleep(1)
 		pw_field.send_keys(password)
-		time.sleep(16)
+		time.sleep(3)
 		login_button.click()
-		time.sleep(16)
-		try:
-			time.sleep(16)
-			browser.find_element(By.ID,"input__phone_verification_pin")
-			verification_code = browser.find_element(By.ID,"input__phone_verification_pin")
-			submit_button = browser.find_element(By.CLASS_NAME,"form__submit form__submit--stretch")
-			verification_code.send_keys(verification_code)
-			time.sleep(1)
-			submit_button.click()
-		except:
-			pass
+		time.sleep(3)
+		# try:
+		# 	time.sleep(16)
+		# 	browser.find_element(By.ID,"input__phone_verification_pin")
+		# 	# verification_code = browser.find_element(By.ID,"input__phone_verification_pin")
+		# 	# submit_button = browser.find_element(By.CLASS_NAME,"form__submit form__submit--stretch")
+		# 	# verification_code.send_keys(verification_code)
+		# 	time.sleep(1)
+		# 	submit_button.click()
+		# except:
+		# 	pass
 		# add here verification code for login or microsoft authenctiocator
 
 	except Exception:
@@ -148,7 +148,7 @@ def save_the_jobs(job_link):
 			dicts['description'].append('None')
 			
 		try:
-			locnameidi = browser.find_element(By.XPATH, '//div[@class="mt2"]')
+			locnameidi = browser.find_element(By.XPATH, '//div[@class="p5"]')
 		except Exception:
 			locnameidi = 'None'
 		try:
@@ -156,7 +156,7 @@ def save_the_jobs(job_link):
 		except Exception:
 			dicts['location'].append('None')
 		if locnameidi != 'None':
-			try:
+			try:																		
 				dicts['ad time'].append(locnameidi.find_element(By.XPATH, '//span[@class="jobs-unified-top-card__subtitle-secondary-grouping t-black--light"]//span').text.split(' ago')[0])
 			except Exception:
 				dicts['ad time'].append('None')

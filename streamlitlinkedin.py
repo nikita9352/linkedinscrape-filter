@@ -65,7 +65,7 @@ location_tag = col2.text_input('', help='Enter the location and hit Enter/Return
 location_tag = location_tag.replace(' ', "%20")
 
 
-verification_code = st.text_input('Enter Verification Code',help='Enter the verification code ',placeholder='Enter the verification code')
+# verification_code = st.text_input('Enter Verification Code',help='Enter the verification code ',placeholder='Enter the verification code')
 
 @st.cache
 def linkedin_complete(username,password,verification_code=None):
@@ -113,7 +113,20 @@ def dataframe_finalizer(df):
 
 
 
-    z = zp.filter(columnss)
+    z = zp.filter(['position name',
+        'workplace',
+        'number of employees',
+        'location',
+        'company name',
+        'working salary info',
+        'number of applicants',
+        'ad time',
+        'hiring status',
+        'corresponds name',
+        'connection is able',
+        'ad language',
+        'job link',
+        'easy apply'])
 
     return dataframe_editor(z)
 
