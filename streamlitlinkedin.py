@@ -23,7 +23,7 @@ import time
 
 st.set_page_config(layout="wide")
 email = 'emrebasarr_@hotmail.com'
-password = 'linkedin19944'  
+password = 'asdasda'  
 
 
 st.title('Linkedin Job Scraper And Enhanced Filtering APP')
