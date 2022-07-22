@@ -22,7 +22,7 @@ import time
 
 
 st.set_page_config(layout="wide")
-email = 'emrebasarr_@hotmail.com'
+email = 'asdasda@hotmail.com'
 password = 'asdasda'  
 
 
