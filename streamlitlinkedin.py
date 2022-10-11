@@ -27,12 +27,6 @@ with open('C:/Users/emreb/Documents/projects/linkedinscraper/linkedinscrape-filt
         if 'password' in line:
             password = line.split('=')[1]
 st.set_page_config(layout="wide")
-<<<<<<< HEAD
-
-=======
-email = 'asdasda@hotmail.com'
-password = 'asdasda'  
->>>>>>> 6ea5bec8495d100262c98c73f706b0934a2bfc28
 
 
 st.title('Linkedin Job Scraper And Enhanced Filtering APP')
