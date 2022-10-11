@@ -5,7 +5,6 @@ import pandas as pd
 import numpy as np 
 # from bs4 import BeautifulSoup as bs
 import re 
-import contextlib
 import time
 from st_aggrid import AgGrid,JsCode, GridUpdateMode
 from st_aggrid.grid_options_builder import GridOptionsBuilder
@@ -19,11 +18,16 @@ import time
 
 # browser.get("https://www.linkedin.com/")
 # print(browser.page_source)
-
-
+# with open('some/')
+with open('C:/Users/emreb/Documents/projects/linkedinscraper/linkedinscrape-filter/some/usenampassword.txt','r') as f:
+    for line in f:
+        if 'username' in line:
+            # print(line)
+            email = line.split('=')[1]
+        if 'password' in line:
+            password = line.split('=')[1]
 st.set_page_config(layout="wide")
-email = 'emrebasarr_@hotmail.com'
-password = 'linkedin19944'  
+
 
 
 st.title('Linkedin Job Scraper And Enhanced Filtering APP')
@@ -145,8 +149,10 @@ selected_workplace = st.sidebar.multiselect('Select the workplace', workplace, w
 languge_workplace_selected_z = language_selected_z[language_selected_z['workplace'].isin(selected_workplace)]
 
 
-max = z['number of applicants'].max() if z['number of applicants'].max() >0 else 1
-Number_of_applications = st.sidebar.slider('Applicants ', help='setted number represenents smaller number of applicants',min_value=int(z['number of applicants'].min()), max_value=int(max), value = int(z['number of applicants'].max()))
+maxx = z['number of applicants'].max() if z['number of applicants'].max() > 0 else 1
+minn = z['number of applicants'].min() if z['number of applicants'].min() != 0 else 0
+# int(z['number of applicants'].min())
+Number_of_applications = st.sidebar.slider('Applicants ', help='setted number represenents smaller number of applicants',min_value=minn, max_value=int(maxx), value = int(z['number of applicants'].max()))
 selected_zzz = languge_workplace_selected_z[languge_workplace_selected_z['number of applicants'] <= Number_of_applications]
 
 try:

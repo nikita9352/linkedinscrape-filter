@@ -112,6 +112,7 @@ def save_the_jobs(job_link):
 		# i.click()
 		time.sleep(1)
 		dicts['job link'].append(job_link[i])
+		browser.execute_script("window.scrollTo(0,document.body.scrollHeight)")
 		try:
 			k = browser.get(job_link[i])
 		# except b:
@@ -170,7 +171,7 @@ def save_the_jobs(job_link):
 				dicts['workplace'].append('None')
 			try:
 				dicts['number of applicants'].append(locnameidi.find_element(By.XPATH, '//span[@class="jobs-unified-top-card__bullet"]//span').text)
-			except Exception:
+			except:
 				dicts['number of applicants'].append(0)
 		else:
 			continue
